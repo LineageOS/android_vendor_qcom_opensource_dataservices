@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ff82abbf_e86887bb",
+        "filename": "Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 8328
+      },
+      "writtenOn": "2015-11-24T08:09:24Z",
+      "side": 1,
+      "message": "shouldn\u0027t this be BOARD_USES_QCOM_HARDWARE ?",
+      "range": {
+        "startLine": 1,
+        "startChar": 8,
+        "endLine": 1,
+        "endChar": 33
+      },
+      "revId": "c08b8ae06b71f082a4ceae92c25d5721e2707017",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
