@@ -182,7 +182,6 @@ void dtop_ip_table_poll_cleanup()
   deconstruct_dpgs(ip_dpg_list);
   dtop_rem_linked_list(ip_dpg_list);
   pthread_mutex_unlock(&dtop_ip_table_lock);
-
 }
 
 /**
@@ -190,7 +189,7 @@ void dtop_ip_table_poll_cleanup()
  *
  * @param arg ptr
  */
-void *dtop_ip_table_start_poll(void *arg)
+void *dtop_ip_table_start_poll(__attribute__((__unused__)) void *arg)
 {
   time_t start_t, curr_t;
   double diff_t = 9999999.00; /* some high # > DTOP_IPTRR_POLL_PERIOD */
