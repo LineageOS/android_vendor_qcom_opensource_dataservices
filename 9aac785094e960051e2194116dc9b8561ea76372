@@ -1,0 +1,22 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da87b5cf_2c7adf88",
+        "filename": "datatop/src/datatop_ip_table_poll.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 2936
+      },
+      "writtenOn": "2017-06-16T16:54:35Z",
+      "side": 1,
+      "message": "does removing the variable name (arg) here accomplish the same thing as marking it __unused?",
+      "parentUuid": "",
+      "revId": "9aac785094e960051e2194116dc9b8561ea76372",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
