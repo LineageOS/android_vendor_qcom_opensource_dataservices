@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da87b5cf_ac3eefb6",
+        "filename": "datatop/src/datatop.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 2936
+      },
+      "writtenOn": "2017-06-16T16:53:18Z",
+      "side": 1,
+      "message": "might as well leave it !strlen",
+      "revId": "70eab627dcd5727329687a3105dd081a2c5a9d9a",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
