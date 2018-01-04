@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "05952e38_d1f018bc",
+        "filename": "rmnetctl/cli/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 3962
+      },
+      "writtenOn": "2018-01-04T19:38:20Z",
+      "side": 1,
+      "message": "Remove this",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 45
+      },
+      "revId": "27c5194e1dfa3117a0b75019a78ebe114942744b",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "efab5a68_8b2d45bb",
+        "filename": "rmnetctl/src/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 3962
+      },
+      "writtenOn": "2018-01-04T19:38:20Z",
+      "side": 1,
+      "message": "Remove these",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 50
+      },
+      "revId": "27c5194e1dfa3117a0b75019a78ebe114942744b",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    }
+  ]
+}
