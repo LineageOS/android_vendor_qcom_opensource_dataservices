@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aeff6006_940f7764",
+        "filename": "datatop/src/datatop_ip_table_poll.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2018-09-03T21:03:04Z",
+      "side": 0,
+      "message": "Useless edit.",
+      "revId": "398622d5ad83bc6738c52c1b0d480ab9e51411d5",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "65d15a87_8f3827ec",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2018-09-03T21:03:04Z",
+      "side": 1,
+      "message": "This no longer applies.",
+      "range": {
+        "startLine": 13,
+        "startChar": 4,
+        "endLine": 15,
+        "endChar": 73
+      },
+      "revId": "e40b1288c355be490f3c181e1274d85541560975",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
