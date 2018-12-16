@@ -884,7 +884,7 @@ int rmnet_new_vnd_name(rmnetctl_hndl_t *hndl,
 
 	memset(request.vnd.vnd_name, 0, RMNET_MAX_STR_LEN);
 		if (prefix) {
-			request.message_type =RMNET_NETLINK_NEW_VND_WITH_NAME;
+			request.message_type =RMNET_NETLINK_NEW_VND_WITH_PREFIX;
 			str_len = strlcpy((char *)request.vnd.vnd_name,
 					  prefix, RMNET_MAX_STR_LEN);
 			if (_rmnetctl_check_len(str_len, error_code)
