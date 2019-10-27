@@ -655,7 +655,9 @@ int rtrmnet_set_uplink_aggregation_params(rmnetctl_hndl_t *hndl,
 					  uint8_t packet_count,
 					  uint16_t byte_count,
 					  uint32_t time_limit,
+#ifndef NO_UPLINK_FEATURES
 					  uint8_t features,
+#endif
 					  uint16_t *error_code);
 
 int rtrmnet_activate_flow(rmnetctl_hndl_t *hndl,
