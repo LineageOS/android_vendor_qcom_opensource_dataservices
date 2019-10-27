@@ -19,6 +19,13 @@ cc_library_shared {
     header_libs: ["generated_kernel_headers"],
     defaults: ["librmnetctl_defaults"],
     srcs: ["src/librmnetctl.c"],
+    product_variables: {
+        lineage: {
+            uses_pre_uplink_features_netmgrd: {
+                cflags: ["-DNO_UPLINK_FEATURES"],
+            },
+        },
+    },
 }
 
 cc_binary {
