@@ -20,7 +20,10 @@ cc_library_shared {
         "qti_kernel_headers",
         "device_kernel_headers",
     ],
-    defaults: ["librmnetctl_defaults"],
+    defaults: [
+        "librmnetctl_defaults",
+        "librmnetctl_pre_uplink_defaults",
+    ],
     srcs: ["src/librmnetctl.c"],
 }
 
