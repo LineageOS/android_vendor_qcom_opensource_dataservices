@@ -604,7 +604,7 @@ int rtrmnet_ctl_changevnd(rmnetctl_hndl_t *hndl, char *devname, char *vndname,
  * for uplink aggregation
  * @param agg_time Where to store the value of the node's maximum time limit
  * for uplink aggregation
- * @param agg_time Where to store the value of the node's features
+ * @param features Where to store the value of the node's features
  * for uplink aggregation
  * @return RMNETCTL_SUCCESS if successful
  * @return RMNETCTL_LIB_ERR if there was a library error. Check error_code
