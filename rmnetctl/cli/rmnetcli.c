@@ -227,6 +227,12 @@ static void rmnet_api_usage(void)
 	printf(_2TABS" <vnd id>                string - vnd device_name");
 	printf(_2TABS" <packet count>          int - maximum packet count");
 	printf(_2TABS" <byte count>            int - maximum byte count");
+#ifdef NO_UPLINK_FEATURES
+	printf(_2TABS" <time limit>            int - maximum time limit\n\n");
+#else
+	printf(_2TABS" <time limit>            int - maximum time limit");
+	printf(_2TABS" <features               int - features\n\n");
+#endif
 	printf(_2TABS" <time limit>            int - maximum time limit\n\n");
 	printf("rmnetcli -n flowactivate <real dev>  activate a flow\n");
 	printf(_2TABS" <vnd_name>              string - vnd device name\n\n");
@@ -374,7 +380,11 @@ static int rmnet_api_call(int argc, char *argv[])
 			_RMNETCLI_CHECKNULL(argv[1]);
 			uint32_t flags = 0;
 			uint16_t mux_id = 0;
+#ifdef NO_UPLINK_FEATURES
+			uint16_t agg_count = 0;
+#else
 			uint8_t agg_count = 0;
+#endif
 			uint16_t agg_size = 0;
 			uint32_t agg_time = 0;
 			uint8_t features = 0;
@@ -410,10 +420,15 @@ static int rmnet_api_call(int argc, char *argv[])
 			_RMNETCLI_CHECKNULL(argv[3]);
 			_RMNETCLI_CHECKNULL(argv[4]);
 			_RMNETCLI_CHECKNULL(argv[5]);
-
+#ifndef NO_UPLINK_FEATURES
+			_RMNETCLI_CHECKNULL(argv[6]);
+#endif
 			return_code = rtrmnet_set_uplink_aggregation_params(
 				handle, argv[1], argv[2], _STRTOUI8(argv[3]),
 				_STRTOUI16(argv[4]), _STRTOUI32(argv[5]),
+#ifndef NO_UPLINK_FEATURES
+				_STRTOUI8(argv[6]),
+#endif
 				&error_number);
 		}
 		else if (!strcmp(*argv, "flowactivate")) {
