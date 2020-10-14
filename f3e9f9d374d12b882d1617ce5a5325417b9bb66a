@@ -22,6 +22,30 @@
       "revId": "f3e9f9d374d12b882d1617ce5a5325417b9bb66a",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6506b7fa_5fea6cb2",
+        "filename": "rmnetctl/Android.bp",
+        "patchSetId": 5
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 10067
+      },
+      "writtenOn": "2020-10-14T16:42:53Z",
+      "side": 1,
+      "message": "sure, if we decide to convert other stuff we can put it there.",
+      "parentUuid": "43fd3ae2_6fae8d00",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 1
+      },
+      "revId": "f3e9f9d374d12b882d1617ce5a5325417b9bb66a",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
     }
   ]
 }
