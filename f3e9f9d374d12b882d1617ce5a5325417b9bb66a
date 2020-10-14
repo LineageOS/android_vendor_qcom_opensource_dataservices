@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "43fd3ae2_6fae8d00",
+        "filename": "rmnetctl/Android.bp",
+        "patchSetId": 5
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2020-10-14T16:41:24Z",
+      "side": 1,
+      "message": "For the future, we can move these declarations in vendor/lineage/Android.bp so that we have a common place",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 1
+      },
+      "revId": "f3e9f9d374d12b882d1617ce5a5325417b9bb66a",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    }
+  ]
+}
