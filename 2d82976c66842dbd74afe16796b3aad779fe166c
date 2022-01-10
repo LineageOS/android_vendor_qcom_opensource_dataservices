@@ -16,6 +16,24 @@
       "message": "Is this strictly necessary? I am building librmnetctl and never faced any warning, iirc.",
       "revId": "2d82976c66842dbd74afe16796b3aad779fe166c",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "681c8d7b_70ffc8a9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19282
+      },
+      "writtenOn": "2022-01-10T18:08:24Z",
+      "side": 1,
+      "message": "build stops for me without.\n\nvendor/qcom/opensource/dataservices/rmnetctl/src/Android.mk:9: error: BUILD_COPY_HEADERS is obsolete. See https://android.googlesource.com/platform/build/+/master/Changes.md#copy_headers.",
+      "parentUuid": "a9d00959_9a2581c7",
+      "revId": "2d82976c66842dbd74afe16796b3aad779fe166c",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
