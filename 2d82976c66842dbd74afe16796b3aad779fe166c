@@ -34,6 +34,24 @@
       "parentUuid": "a9d00959_9a2581c7",
       "revId": "2d82976c66842dbd74afe16796b3aad779fe166c",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4879f3e8_b9fad32b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 24438
+      },
+      "writtenOn": "2022-01-14T23:53:16Z",
+      "side": 1,
+      "message": "I have the same error but apparently 320736 fixes it",
+      "parentUuid": "681c8d7b_70ffc8a9",
+      "revId": "2d82976c66842dbd74afe16796b3aad779fe166c",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
