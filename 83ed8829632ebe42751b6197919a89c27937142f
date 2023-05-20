@@ -16,6 +16,24 @@
       "message": "Does this affect older qcom platforms?",
       "revId": "83ed8829632ebe42751b6197919a89c27937142f",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "537dc2b6_a12704f2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2023-05-20T14:44:31Z",
+      "side": 1,
+      "message": "Yes, it breaks blobs. We will probably need a -legacy branch.",
+      "parentUuid": "bae84b1c_e4c68f07",
+      "revId": "83ed8829632ebe42751b6197919a89c27937142f",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
