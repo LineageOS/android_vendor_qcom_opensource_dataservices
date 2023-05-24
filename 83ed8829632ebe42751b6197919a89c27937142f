@@ -34,6 +34,23 @@
       "parentUuid": "bae84b1c_e4c68f07",
       "revId": "83ed8829632ebe42751b6197919a89c27937142f",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "11af59d8_78e7d391",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2023-05-24T09:59:21Z",
+      "side": 1,
+      "message": "Breaks legacy.",
+      "revId": "83ed8829632ebe42751b6197919a89c27937142f",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
