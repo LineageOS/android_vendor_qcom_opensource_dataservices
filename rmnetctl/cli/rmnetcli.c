@@ -60,7 +60,11 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #define _RMNETCLI_CHECKNULL(X)		do { if (!X) {                         \
 print_rmnet_api_status(RMNETCTL_INVALID_ARG, RMNETCTL_CFG_FAILURE_NO_COMMAND); \
+#ifdef USE_OLD_RMNET_DATA
 				rmnetctl_cleanup(handle);                      \
+#else
+				rtrmnet_ctl_deinit(handle);                    \
+#endif
 				return RMNETCTL_INVALID_ARG;                   \
 		} } while (0);
 #define _STRTOUI32(X)           (uint32_t)strtoul(X, NULL, 0)
@@ -362,7 +366,11 @@ static int rmnet_api_call(int argc, char *argv[])
 	struct rmnetctl_hndl_s *handle = NULL;
 	uint16_t error_number = RMNETCTL_CFG_FAILURE_NO_COMMAND;
 	int return_code = RMNETCTL_LIB_ERR;
+#ifdef USE_OLD_RMNET_DATA
 	int is_new_api = 0;
+#else
+	int is_new_api = 1;
+#endif
 
 	if ((!argc) || (!*argv)) {
 		print_rmnet_api_status(RMNETCTL_LIB_ERR,
@@ -376,7 +384,6 @@ static int rmnet_api_call(int argc, char *argv[])
 	}
 
 	if (!strcmp(*argv, "-n")) {
-		is_new_api = 1;
 		return_code = rtrmnet_ctl_init(&handle, &error_number);
 		if (return_code != RMNETCTL_SUCCESS) {
 			print_rmnet_api_status(return_code, error_number);
@@ -572,7 +579,10 @@ static int rmnet_api_call(int argc, char *argv[])
 			if (!bearers) {
 				print_rmnet_api_status(RMNETCTL_INVALID_ARG,
 					RMNETCTL_CFG_FAILURE_NO_COMMAND);
-				rmnetctl_cleanup(handle);
+				if (is_new_api)
+					rtrmnet_ctl_deinit(handle);
+				else
+					rmnetctl_cleanup(handle);
 				return RMNETCTL_INVALID_ARG;
 			}
 
@@ -598,6 +608,7 @@ static int rmnet_api_call(int argc, char *argv[])
 
 
 		goto end;
+#ifdef USE_OLD_RMNET_DATA
 	} else {
 		return_code = rmnetctl_init(&handle, &error_number);
 		if (return_code != RMNETCTL_SUCCESS) {
@@ -725,6 +736,7 @@ static int rmnet_api_call(int argc, char *argv[])
 		_RMNETCLI_CHECKNULL(argv[1]);
 		return_code = rmnet_unset_logical_ep_config(handle,
 		_STRTOI32(argv[1]), argv[2], &error_number);
+#endif
 	}
 end:
 	print_rmnet_api_status(return_code, error_number);
