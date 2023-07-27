@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32858248_c0aa23b2",
+        "filename": "rmnetctl/cli/rmnetcli.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 582,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2023-07-27T21:26:01Z",
+      "side": 1,
+      "message": "should be ifdef",
+      "revId": "be11cf6ed8f4272714090d36964e5b9705295d86",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
