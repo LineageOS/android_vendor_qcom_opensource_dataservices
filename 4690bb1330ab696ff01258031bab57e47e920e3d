@@ -16,6 +16,24 @@
       "message": "I hardly think there\u0027s any cli usage, but this is changing the logic for legacy targets as before the could\u0027ve opted for the new API, now not anymore\nYou should default the value to 1/0 depending of ifdef, then add an ifdef here for legacy to allow opt-in",
       "revId": "4690bb1330ab696ff01258031bab57e47e920e3d",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "668ad05d_54163779",
+        "filename": "rmnetctl/cli/rmnetcli.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2023-07-27T23:01:16Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "7f390289_14f5c0c1",
+      "revId": "4690bb1330ab696ff01258031bab57e47e920e3d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "df069273_ecf4fb8d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2023-07-27T23:01:16Z",
+      "side": 1,
+      "message": "Sucessfully built lemonadep (lahaina) and salami (kalama). Also compile tested rmnetcli for both targets, without any issues.",
+      "revId": "52bcdb5682086932d47391c6d2795f55280314fd",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
