@@ -53,7 +53,9 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <linux/gen_stats.h>
 #include <net/if.h>
 #include <asm/types.h>
+#ifdef USE_OLD_RMNET_DATA
 #include <linux/rmnet_data.h>
+#endif
 #include "librmnetctl_hndl.h"
 #include "librmnetctl.h"
 
@@ -196,7 +198,7 @@ static inline int  memscpy_repeat(void* dst, size_t *dst_size,
 	return *dst_size;
 }
 
-
+#ifdef USE_OLD_RMNET_DATA
 /*!
 * @brief Synchronous method to send and receive messages to and from the kernel
 * using  netlink sockets
@@ -312,6 +314,7 @@ static uint16_t rmnetctl_transact(rmnetctl_hndl_t *hndl,
 	free(response_buf);
 	return return_code;
 }
+#endif
 
 /*!
 * @brief Static function to check the dev name
@@ -326,13 +329,18 @@ static inline int _rmnetctl_check_dev_name(const char *dev_name) {
 	do {
 	if (!dev_name)
 		break;
+#ifdef USE_OLD_RMNET_DATA
 	if (strlen(dev_name) >= RMNET_MAX_STR_LEN)
+#else
+	if (strlen(dev_name) >= IFNAMSIZ)
+#endif
 		break;
 	return_code = RMNETCTL_SUCCESS;
 	} while(0);
 	return return_code;
 }
 
+#ifdef USE_OLD_RMNET_DATA
 /*!
 * @brief Static function to check the string length after a copy
 * @details Checks if the string length is not lesser than zero and lesser than
@@ -412,11 +420,13 @@ static inline int _rmnetctl_set_codes(int error_val, uint16_t *error_code) {
 		*error_code = (uint16_t)error_val + RMNETCTL_KERNEL_FIRST_ERR;
 	return return_code;
 }
+#endif
 
 /*===========================================================================
 				EXPOSED API
 ===========================================================================*/
 
+#ifdef USE_OLD_RMNET_DATA
 int rmnetctl_init(rmnetctl_hndl_t **hndl, uint16_t *error_code)
 {
 	pid_t pid = 0;
@@ -1049,6 +1059,7 @@ int rmnet_add_del_vnd_tc_flow(rmnetctl_hndl_t *hndl,
 	} while(0);
 	return return_code;
 }
+#endif
 
 /*
  *                       NEW DRIVER API
