@@ -105,17 +105,14 @@ static int dtop_cpu_search(void)
 /**
  * @brief Creates a dpg designed for CPU online and CPU scaling_cur_freq stats.
  *
- * @param name Name of file dpg represents.
+ * @param file malloc()ed name of file dpg represents.
  */
-static void construct_cpu_stat_dpg(char *name)
+static void construct_cpu_stat_dpg(char *file)
 {
-	char *file = malloc(strlen(name) + 1);
 	struct dtop_data_point *dp =
 			malloc(sizeof(struct dtop_data_point));
 	struct dtop_data_point_gatherer *dpg = malloc
 		(sizeof(struct dtop_data_point_gatherer));
-
-	strlcpy(file, name, strlen(name) + 1);
 
 	dp[0].type = DTOP_ULONG;
 	dp[0].name = malloc(5);
@@ -154,7 +151,6 @@ static void cpu_poll_helper(char *file, char *add, int cpu_amt)
 		char *newfile = NULL;
 		asprintf(&newfile, "%s%d%s", file, i, add);
 		construct_cpu_stat_dpg(newfile);
-		free(newfile);
 	}
 }
 
