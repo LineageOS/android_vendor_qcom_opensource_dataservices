@@ -115,8 +115,7 @@ static void construct_cpu_stat_dpg(char *file)
 		(sizeof(struct dtop_data_point_gatherer));
 
 	dp[0].type = DTOP_ULONG;
-	dp[0].name = malloc(5);
-	strlcpy(dp[0].name, "", 5);
+	dp[0].name = strdup("");
 	dp[0].prefix = NULL;
 	dp[0].data.d_ulong = 0;
 	dp[0].initial_data.d_ulong = 0;
