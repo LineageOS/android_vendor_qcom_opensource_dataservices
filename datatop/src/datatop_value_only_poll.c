@@ -166,18 +166,14 @@ int dtop_value_only_search(char *name)
 
 	/* Creates a dtop_data_point struct for each dp found in the file */
 	for (i = 0; i < dict.max; i++) {
-		char *newname = malloc(sizeof(10));
 		if (dict.val[i][0] == '-')
 			data_points[i].type = DTOP_LONG;
 		else
 			data_points[i].type = DTOP_ULONG;
-		data_points[i].name = malloc(sizeof(10));
 		if (dict.max > 1)
-			snprintf(newname, sizeof(10), "[%d]:", i);
+			asprintf(&data_points[i].name, "[%d]:", i);
 		else
-			strlcpy(newname, "", sizeof(10));
-		strlcpy(data_points[i].name, newname, sizeof(10));
-		free(newname);
+			data_points[i].name = strdup("");
 		data_points[i].prefix = NULL;
 		data_points[i].skip = DO_NOT_SKIP;
 		data_points[i].initial_data_populated = NOT_POPULATED;
