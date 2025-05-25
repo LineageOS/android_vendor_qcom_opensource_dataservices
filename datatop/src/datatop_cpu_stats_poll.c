@@ -50,58 +50,6 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "datatop_str.h"
 #include "datatop_polling.h"
 
-#define DTOP_GEN_SIZE 8192
-#define DTOP_GEN_LINE (DTOP_GEN_SIZE>>2)
-#define NO_CPUS_ONLINE -1
-
-/**
- * @brief Searches /sys/devices/system/cpu/ directory to get find number of CPUs.
- *
- * @return Number of CPUs found in directory.
- */
-static int dtop_cpu_search(void)
-{
-	DIR *dp;
-	struct dirent *entry;
-	struct stat s;
-	int cpu_amt;
-	char cwd[1024];
-
-	if (!getcwd(cwd, sizeof(cwd))) {
-		fprintf(stderr, "Failed to get current working dir\n");
-		return -1;
-	}
-
-	dp = opendir("/sys/devices/system/cpu/");
-	if (dp == NULL) {
-		fprintf(stderr, "err=%d: %s\n", errno, strerror(errno));
-		fprintf(stderr, "Cannot open directory: %s\n",
-					"/sys/devices/system/cpu/");
-		return NO_CPUS_ONLINE;
-	}
-
-	chdir("/sys/devices/system/cpu/");
-	cpu_amt = 0;
-	while ((entry = readdir(dp))) {
-		if (stat(entry->d_name, &s)) {
-			printf("stat err=%d: %s\n", errno, strerror(errno));
-			return NO_CPUS_ONLINE;
-		}
-
-		if (entry->d_name[0] == 'c' &&
-			entry->d_name[1] == 'p' &&
-			entry->d_name[2] == 'u' &&
-			(isdigit(entry->d_name[3]))) {
-
-			cpu_amt++;
-		}
-	}
-
-	closedir(dp);
-	chdir(cwd);
-	return cpu_amt;
-}
-
 /**
  * @brief Creates a dpg designed for CPU online and CPU scaling_cur_freq stats.
  *
@@ -162,7 +110,7 @@ void dtop_cpu_stats_init(void)
 	char *file = "/sys/devices/system/cpu/cpu";
 	char *add = "/cpufreq/scaling_cur_freq";
 
-	cpu_amt = dtop_cpu_search();
+	cpu_amt = sysconf(_SC_NPROCESSORS_CONF);
 	cpu_poll_helper(file, add, cpu_amt);
 	add = "/online";
 	cpu_poll_helper(file, add, cpu_amt);
