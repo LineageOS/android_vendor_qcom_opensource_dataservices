@@ -151,16 +151,8 @@ static void cpu_poll_helper(char *file, char *add, int cpu_amt)
 {
 	int i;
 	for (i = 0; i < cpu_amt; i++) {
-		char *cpu_num = malloc(5);
-		char *newfile;
-		int nf_len;
-		snprintf(cpu_num, 5, "%d", i);
-		nf_len = strlen(file) + strlen(add) + strlen(cpu_num) + 2;
-		newfile = malloc(nf_len);
-		strlcpy(newfile, file, nf_len);
-		strlcat(newfile, cpu_num, nf_len);
-		strlcat(newfile, add, nf_len);
-		free(cpu_num);
+		char *newfile = NULL;
+		asprintf(&newfile, "%s%d%s", file, i, add);
 		construct_cpu_stat_dpg(newfile);
 		free(newfile);
 	}
