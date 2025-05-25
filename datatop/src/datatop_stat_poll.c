@@ -264,30 +264,10 @@ int dtop_stat_search(struct dtop_stat_vars *storage)
 	for (i = 0; i < (storage->line_count); i++) {
 		for (n = 0; n < dp_per_line[i]; n++) {
 			if (dp_per_line[i] == 1) {
-				int dk_len = strlen(dict.key[i]) + 1;
-				int dp_len;
-				char *newname = malloc(dk_len);
-				strlcpy(newname, dict.key[i], dk_len);
-				dp_len = strlen(newname) + 1;
-				data_points[count].name = malloc(dp_len);
-				strlcpy(data_points[count].name, newname,
-					dp_len);
-				free(newname);
+				data_points[count].name = strdup(dict.key[i]);
 			} else {
-				char *add = malloc(15 * sizeof(char));
-				char *newname;
-				int nn_len, dpn_len;
-				snprintf(add, 15 * sizeof(char), "[%d]:", n);
-				nn_len = strlen(dict.key[i]) + strlen(add) + 1;
-				newname = malloc(nn_len);
-				strlcpy(newname, dict.key[i], nn_len);
-				strlcat(newname, add, nn_len);
-				dpn_len = strlen(newname) + 1;
-				data_points[count].name = malloc(dpn_len);
-				strlcpy(data_points[count].name, newname,
-					dpn_len);
-				free(newname);
-				free(add);
+				asprintf(&data_points[count].name,
+					"%s[%d]:", dict.key[i], n);
 			}
 			data_points[count].prefix = NULL;
 			data_points[count].type = DTOP_ULONG;
