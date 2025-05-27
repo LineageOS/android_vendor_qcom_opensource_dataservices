@@ -185,11 +185,3 @@ int dtop_value_only_search(char *name)
 	dt_free(&data);
 	return DTOP_POLL_OK;
 }
-
-/**
- * @brief Calls dtop_search for files with a single line and only values.
- */
-void dtop_value_only_init(char *name)
-{
-	dtop_value_only_search(strdup(name));
-}

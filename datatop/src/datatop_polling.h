@@ -37,7 +37,6 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 void dtop_dual_line_init(char *name);
 void dtop_single_line_init(char *name);
-void dtop_value_only_init(char *name);
 void dtop_meminfo_init(void);
 void dtop_dev_init(void);
 void dtop_stat_init(void);

@@ -29,7 +29,6 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 /**
  * @file datatop_cpu_stats_poll.c
- * @brief Calls dtop_value_only_init for necessary cpu datapoints.
  *
  * File contains methods for determing number of cpu's online and calling
  * correct initialization function to gather scaling_cur_freq data point
