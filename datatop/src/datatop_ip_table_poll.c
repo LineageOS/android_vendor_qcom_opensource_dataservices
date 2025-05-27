@@ -76,7 +76,8 @@ int dtop_ip_table_poll(struct dtop_data_point_gatherer *dpg)
 {
   FILE *fd;
   FILE *fo = (FILE *)dpg->file;
-  char buf[1001];
+  char buf[2048];
+  size_t rd;
 
   time_t rawtime;
   struct tm * timeinfo;
@@ -103,9 +104,9 @@ int dtop_ip_table_poll(struct dtop_data_point_gatherer *dpg)
 	  return DTOP_POLL_IO_ERR;
   }
 
-  while(fgets(buf, 1000, fd) != NULL)
+  while((rd = fread(buf, 1, sizeof(buf), fd)))
   {
-    fputs(buf, fo);
+    fwrite(buf, 1, rd, fo);
   }
 
   fprintf ( fo, "============\nEnd: %s==========\n\n", asctime (timeinfo) );
