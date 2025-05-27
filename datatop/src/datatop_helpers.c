@@ -385,10 +385,7 @@ int dtop_print_time_at_poll(FILE *fw)
 	struct timeval tv;
 	gettimeofday(&tv, NULL);
 
-	if (fprintf(fw, "%10ld", tv.tv_sec) < 0)
-		return FILE_ERROR;
-
-	if (fprintf(fw, ".%06ld,", tv.tv_usec) < 0)
+	if (fprintf(fw, "%10ld.%06ld,", tv.tv_sec, tv.tv_usec) < 0)
 		return FILE_ERROR;
 
 	return FILE_SUCCESS;
