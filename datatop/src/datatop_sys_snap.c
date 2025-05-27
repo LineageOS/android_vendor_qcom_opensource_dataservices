@@ -92,11 +92,9 @@ static int dtop_run_and_log(char *file, const char *c1, const char **args)
 		dup2(fd, STDOUT_FILENO);
 		dup2(fd, STDERR_FILENO);
 		execvp(c1, (char * const *)args);
-		printf("Failed to execute %s\n", c1);
-		printf("errno=%d error=%s\n", errno, strerror(errno));
-		close(STDOUT_FILENO);
-		close(STDERR_FILENO);
-		exit(0);
+		dprintf(STDOUT_FILENO, "Failed to execute %s\n", c1);
+		dprintf(STDOUT_FILENO, "errno=%d error=%s\n", errno, strerror(errno));
+		_exit(0);
 	} else if (child_pid < 0) {
 		return FILE_ERROR;
 	} else {
