@@ -42,26 +42,6 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "datatop_str.h"
 #include "datatop_opt.h"
 
-#define DTOP_SNAP_SIZE 8192
-#define DTOP_SNAP_LINE (DTOP_SNAP_SIZE>>2)
-
-static int dtop_system_snapshot_helper_print(char *file, const char *str)
-{
-	FILE *snap_file = fopen(file, "a");
-
-	if (snap_file) {
-		if (fprintf(snap_file, "%s", str) < 0) {
-			fclose(snap_file);
-			return FILE_ERROR;
-		}
-	} else {
-			return FILE_ERROR;
-	}
-	fflush(snap_file);
-	fclose(snap_file);
-	return FILE_SUCCESS;
-}
-
 /**
  * @brief A helper function to dtop_print_system_snapshot.
  *
@@ -69,28 +49,25 @@ static int dtop_system_snapshot_helper_print(char *file, const char *str)
  * @return FILE_ERROR - Writing to file was unsuccessful.
  * @return FILE_SUCCESS - Writing to file was successful.
  */
-static int dtop_run_and_log(char *file, const char *c1, const char **args)
+static int dtop_run_and_log(FILE *out, const char *c1, const char **args)
 {
 	int i;
 	pid_t child_pid;
 
 	i = 0;
-	dtop_system_snapshot_helper_print(file, "\n"
+	fputs("\n"
 	"--------------------------------------------------------------\n"
-	"Command: ");
-	while(args[i] != 0) {
-		dtop_system_snapshot_helper_print(file, args[i++]);
-		dtop_system_snapshot_helper_print(file, " ");
-	}
-	dtop_system_snapshot_helper_print(file, "\n");
+	"Command: ", out);
+	while(args[i] != 0)
+		fprintf(out, "%s ", args[i++]);
+	fputs("\n", out);
+	fflush(out);
 
 
 	child_pid = fork();
 	if (child_pid == 0) {
-		int fd = open(file, O_WRONLY | O_APPEND | O_CREAT | O_CLOEXEC,
-						S_IRUSR | S_IWUSR);
-		dup2(fd, STDOUT_FILENO);
-		dup2(fd, STDERR_FILENO);
+		dup2(fileno(out), STDOUT_FILENO);
+		dup2(fileno(out), STDERR_FILENO);
 		execvp(c1, (char * const *)args);
 		dprintf(STDOUT_FILENO, "Failed to execute %s\n", c1);
 		dprintf(STDOUT_FILENO, "errno=%d error=%s\n", errno, strerror(errno));
@@ -142,7 +119,7 @@ const char *xfrm_policy[] = {"ip", "xfrm", "policy", "show", 0};
 const char *xfrm_netstat[] = {"cat", "/proc/net/xfrm_stat", 0};
 
 #define DO_DTOP_RUN_AND_LOG(X) \
-	dtop_run_and_log(file, X[0], X);
+	dtop_run_and_log(out, X[0], X);
 /**
  * @brief Prints a System snapshot to a file specified by the user.
  *
@@ -152,14 +129,16 @@ const char *xfrm_netstat[] = {"cat", "/proc/net/xfrm_stat", 0};
  */
 int dtop_print_system_snapshot(char *file)
 {
-	dtop_system_snapshot_helper_print(file,
+	FILE *out = fopen(file, "ae");
+	if(!out)
+		out = stdout;
+	fputs(
 	"==============================================================\n"
 	"    System Data Snapshot - Captured with Data Top             \n"
-	"    Version ");
-	dtop_system_snapshot_helper_print(file, VERSION);
-	dtop_system_snapshot_helper_print(file, "\n"
+	"    Version " VERSION "\n"
 	"==============================================================\n"
-	"\n");
+	"\n", out);
+	fflush(out);
 
 	/* IPv4 */
 	DO_DTOP_RUN_AND_LOG(ip_addr_cmd);
@@ -192,5 +171,6 @@ int dtop_print_system_snapshot(char *file)
 	DO_DTOP_RUN_AND_LOG(xfrm_policy);
 	DO_DTOP_RUN_AND_LOG(xfrm_netstat);
 
+	dtop_close_file(out);
 	return FILE_SUCCESS;
 }
