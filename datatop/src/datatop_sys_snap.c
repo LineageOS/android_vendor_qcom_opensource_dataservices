@@ -49,7 +49,7 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * @return FILE_ERROR - Writing to file was unsuccessful.
  * @return FILE_SUCCESS - Writing to file was successful.
  */
-static int dtop_run_and_log(FILE *out, const char *c1, const char **args)
+static int dtop_run_and_log(FILE *out, const char *c1, const char * const*args)
 {
 	int i;
 	pid_t child_pid;
@@ -88,35 +88,35 @@ static int dtop_run_and_log(FILE *out, const char *c1, const char **args)
 
 
 /* IPv4 */
-const char *ip_addr_cmd[] = {"ip", "addr", 0};
-const char *ip_route_cmd[] = {"ip", "route", 0};
-const char *ip_route_all_tables_cmd[] = {"ip", "route", "show", "table", "all", 0};
-const char *ip_rule_cmd[] = {"ip", "rule", "show", 0};
-const char *ip_tables_cmd[] = {"iptables", "-L", "-n", "-v", 0};
-const char *ip_tables_nat_cmd[] = {"iptables", "-t", "nat", "-L", "-n", "-v", 0};
-const char *ip_tables_mangle_cmd[] = {"iptables", "-t", "mangle", "-L", "-n", "-v", 0};
-const char *ip_tables_raw_cmd[] = {"iptables", "-t", "raw", "-L", "-n", "-v", 0};
+static const char *const ip_addr_cmd[] = {"ip", "addr", 0};
+static const char *const ip_route_cmd[] = {"ip", "route", 0};
+static const char *const ip_route_all_tables_cmd[] = {"ip", "route", "show", "table", "all", 0};
+static const char *const ip_rule_cmd[] = {"ip", "rule", "show", 0};
+static const char *const ip_tables_cmd[] = {"iptables", "-L", "-n", "-v", 0};
+static const char *const ip_tables_nat_cmd[] = {"iptables", "-t", "nat", "-L", "-n", "-v", 0};
+static const char *const ip_tables_mangle_cmd[] = {"iptables", "-t", "mangle", "-L", "-n", "-v", 0};
+static const char *const ip_tables_raw_cmd[] = {"iptables", "-t", "raw", "-L", "-n", "-v", 0};
 
 /* IPv6 */
-const char *ip6_addr_cmd[] = {"ip", "-6", "addr", 0};
-const char *ip6_route_cmd[] = {"ip", "-6", "route", 0};
-const char *ip6_route_all_tables_cmd[] = {"ip", "-6", "route", "show", "table", "all", 0};
-const char *ip6_rule_cmd[] = {"ip", "-6", "rule", "show", 0};
-const char *ip6_tables_cmd[] = {"ip6tables", "-L", "-n", "-v", 0};
-const char *ip6_tables_nat_cmd[] = {"ip6tables", "-t", "nat", "-L", "-n", "-v", 0};
-const char *ip6_tables_mangle_cmd[] = {"ip6tables", "-t", "mangle", "-L", "-n", "-v", 0};
-const char *ip6_tables_raw_cmd[] = {"ip6tables", "-t", "raw", "-L", "-n", "-v", 0};
+static const char *const ip6_addr_cmd[] = {"ip", "-6", "addr", 0};
+static const char *const ip6_route_cmd[] = {"ip", "-6", "route", 0};
+static const char *const ip6_route_all_tables_cmd[] = {"ip", "-6", "route", "show", "table", "all", 0};
+static const char *const ip6_rule_cmd[] = {"ip", "-6", "rule", "show", 0};
+static const char *const ip6_tables_cmd[] = {"ip6tables", "-L", "-n", "-v", 0};
+static const char *const ip6_tables_nat_cmd[] = {"ip6tables", "-t", "nat", "-L", "-n", "-v", 0};
+static const char *const ip6_tables_mangle_cmd[] = {"ip6tables", "-t", "mangle", "-L", "-n", "-v", 0};
+static const char *const ip6_tables_raw_cmd[] = {"ip6tables", "-t", "raw", "-L", "-n", "-v", 0};
 
 /* Misc */
-const char *rps_config[] = {"cat", "/sys/class/net/rmnet_mhi0/queues/rx-0/rps_cpus", 0};
-const char *if_config[] = {"/data/busybox/busybox", "ifconfig", 0};
-const char *netcfg[] = {"netcfg", 0};
-const char *softnet_stat[] = {"cat", "/proc/net/softnet_stat", 0};
+static const char *const rps_config[] = {"cat", "/sys/class/net/rmnet_mhi0/queues/rx-0/rps_cpus", 0};
+static const char *const if_config[] = {"/data/busybox/busybox", "ifconfig", 0};
+static const char *const netcfg[] = {"netcfg", 0};
+static const char *const softnet_stat[] = {"cat", "/proc/net/softnet_stat", 0};
 
 /* XFRM logging */
-const char *xfrm_state[] = {"ip", "xfrm", "state", "show", 0};
-const char *xfrm_policy[] = {"ip", "xfrm", "policy", "show", 0};
-const char *xfrm_netstat[] = {"cat", "/proc/net/xfrm_stat", 0};
+static const char *const xfrm_state[] = {"ip", "xfrm", "state", "show", 0};
+static const char *const xfrm_policy[] = {"ip", "xfrm", "policy", "show", 0};
+static const char *const xfrm_netstat[] = {"cat", "/proc/net/xfrm_stat", 0};
 
 #define DO_DTOP_RUN_AND_LOG(X) \
 	dtop_run_and_log(out, X[0], X);
