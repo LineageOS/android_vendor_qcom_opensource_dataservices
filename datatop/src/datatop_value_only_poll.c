@@ -191,7 +191,5 @@ int dtop_value_only_search(char *name)
  */
 void dtop_value_only_init(char *name)
 {
-	char *file = malloc(strlen(name) + 1);
-	strlcpy(file, name, strlen(name) + 1);
-	dtop_value_only_search(file);
+	dtop_value_only_search(strdup(name));
 }
