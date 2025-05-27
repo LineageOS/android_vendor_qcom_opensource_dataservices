@@ -39,6 +39,7 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include "datatop_interface.h"
 #include "datatop_fileops.h"
 #include "datatop_str.h"
@@ -61,9 +62,7 @@ int dtop_value_only_poll(struct dtop_data_point_gatherer *dpg)
 	int read;
 	struct dt_procdict dict;
 	int j;
-	FILE *check = fopen(dpg->file, "r");
-	if (check) {
-		fclose(check);
+	if (access(dpg->file, R_OK) == 0) {
 		read = dt_read_file(dpg->file, &data, DTOP_SINGLE_SIZE);
 	} else {
 		return DTOP_POLL_IO_ERR;
