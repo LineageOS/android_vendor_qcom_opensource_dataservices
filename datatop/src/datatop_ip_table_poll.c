@@ -40,7 +40,9 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <stdlib.h>
 #include <unistd.h>
 #include <time.h>
+#include <paths.h>
 #include <pthread.h>
+#include <sys/wait.h>
 #include "datatop_interface.h"
 #include "datatop_fileops.h"
 #include "datatop_str.h"
@@ -74,10 +76,8 @@ pthread_mutex_t dtop_ip_table_lock;
  */
 int dtop_ip_table_poll(struct dtop_data_point_gatherer *dpg)
 {
-  FILE *fd;
   FILE *fo = (FILE *)dpg->file;
-  char buf[2048];
-  size_t rd;
+  pid_t child_pid;
 
   time_t rawtime;
   struct tm * timeinfo;
@@ -94,19 +94,18 @@ int dtop_ip_table_poll(struct dtop_data_point_gatherer *dpg)
   fprintf ( fo, "============\nStart: %s==========\n", asctime (timeinfo) );
   fflush(fo);
 
-  /* redirect stderr to output file */
-  dup2(fileno(fo), 2);
-
-  fd = popen((char *)dpg->priv, "r");
-  if(fd == NULL)
-  {
-    fprintf(stderr, "Could not popen: %s\n", (char *)dpg->priv);
-	  return DTOP_POLL_IO_ERR;
-  }
-
-  while((rd = fread(buf, 1, sizeof(buf), fd)))
-  {
-    fwrite(buf, 1, rd, fo);
+  child_pid = fork();
+  if (child_pid == 0) {
+    dup2(fileno(fo), STDOUT_FILENO);
+    dup2(fileno(fo), STDERR_FILENO);
+    execl(_PATH_BSHELL, _PATH_BSHELL, "-c", "--", (char *)dpg->priv, (char *)NULL);
+    dprintf(STDERR_FILENO, "Could not popen: %s\n", (char *)dpg->priv);
+    _exit(0);
+  } else if (child_pid < 0) {
+    fprintf(fo, "Could not popen: %s\n", (char *)dpg->priv);
+    return DTOP_POLL_IO_ERR;
+  } else {
+    waitpid(child_pid, NULL, 0);
   }
 
   time ( &rawtime );
@@ -114,7 +113,6 @@ int dtop_ip_table_poll(struct dtop_data_point_gatherer *dpg)
 
   fprintf ( fo, "============\nEnd: %s==========\n\n", asctime (timeinfo) );
   fflush(fo);
-  pclose(fd);
 	return DTOP_POLL_OK;
 }
 
