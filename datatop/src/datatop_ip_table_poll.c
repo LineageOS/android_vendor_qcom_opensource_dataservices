@@ -109,6 +109,9 @@ int dtop_ip_table_poll(struct dtop_data_point_gatherer *dpg)
     fwrite(buf, 1, rd, fo);
   }
 
+  time ( &rawtime );
+  timeinfo = gmtime ( &rawtime );
+
   fprintf ( fo, "============\nEnd: %s==========\n\n", asctime (timeinfo) );
   fflush(fo);
   pclose(fd);
