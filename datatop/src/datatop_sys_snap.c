@@ -87,11 +87,10 @@ static int dtop_run_and_log(char *file, const char *c1, const char **args)
 
 	child_pid = fork();
 	if (child_pid == 0) {
-		int fd = open(file, O_WRONLY | O_APPEND | O_CREAT,
+		int fd = open(file, O_WRONLY | O_APPEND | O_CREAT | O_CLOEXEC,
 						S_IRUSR | S_IWUSR);
 		dup2(fd, STDOUT_FILENO);
 		dup2(fd, STDERR_FILENO);
-		close(fd);
 		execvp(c1, (char * const *)args);
 		printf("Failed to execute %s\n", c1);
 		printf("errno=%d error=%s\n", errno, strerror(errno));
