@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "85597426_d49bfb99",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4550
+      },
+      "writtenOn": "2025-05-28T10:26:47Z",
+      "side": 1,
+      "message": "FYI datatop is a debugging tool, which is not compiled by any shipping device and is unused, so all these changes are pointless",
+      "revId": "7a0968f5505e6926621843307de919771956e54e",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
