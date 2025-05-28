@@ -34,6 +34,24 @@
       "parentUuid": "85597426_d49bfb99",
       "revId": "7a0968f5505e6926621843307de919771956e54e",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac3f587b_b71207db",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4550
+      },
+      "writtenOn": "2025-05-28T15:16:48Z",
+      "side": 1,
+      "message": "It\u0027s not unused, librmnetctl is compiled as a dependency of proprietary blobs on most qualcomm devices",
+      "parentUuid": "ea725cf3_80274257",
+      "revId": "7a0968f5505e6926621843307de919771956e54e",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
