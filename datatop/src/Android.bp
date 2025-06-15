@@ -6,7 +6,6 @@ cc_binary {
         "-Wall",
         "-Wextra",
         "-Werror",
-        "-pedantic",
         "-std=c99",
         "-DVERSION=\"1.0.4\"",
         "-DHAVE_STRL_FUNCTIONS",
