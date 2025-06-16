@@ -16,6 +16,23 @@
       "message": "move to lineage-23.0 when branch is created",
       "revId": "a4d84867c9d7e29aa043df54bf305f5e184c0a9b",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec0e25ed_3badf10f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 28223
+      },
+      "writtenOn": "2025-06-16T16:55:46Z",
+      "side": 1,
+      "message": "https://review.lineageos.org/c/LineageOS/android_vendor_qcom_opensource_dataservices/+/433597",
+      "revId": "a4d84867c9d7e29aa043df54bf305f5e184c0a9b",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
