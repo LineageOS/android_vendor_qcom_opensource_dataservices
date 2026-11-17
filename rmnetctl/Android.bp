@@ -12,6 +12,9 @@ cc_defaults {
     ] + select(soong_config_variable("rmnetctl", "old_rmnet_data"), {
         "true": ["-DUSE_OLD_RMNET_DATA"],
         default: [],
+    }) + select(soong_config_variable("rmnetctl", "mainline_rmnet"), {
+        "true": ["-DUSE_MAINLINE_RMNET"],
+        default: [],
     }),
     header_libs: ["librmnetctl_headers"],
     vendor: true,

@@ -1210,6 +1210,44 @@ static struct rtattr *rta_find(struct rtattr *rta, int attrlen, uint16_t type)
 	return NULL;
 }
 
+#ifdef USE_MAINLINE_RMNET
+/* rmnet_core's MAPv5 checksum flags, from its private rmnet_private.h */
+#define RMNET_DOWNSTREAM_INGRESS_MAP_CKSUMV5	(1U << 5)
+#define RMNET_DOWNSTREAM_EGRESS_MAP_CKSUMV5	(1U << 6)
+
+#define RMNET_SHARED_FLAGS	(RMNET_FLAGS_INGRESS_DEAGGREGATION | \
+				 RMNET_FLAGS_INGRESS_MAP_COMMANDS | \
+				 RMNET_FLAGS_INGRESS_MAP_CKSUMV4 | \
+				 RMNET_FLAGS_EGRESS_MAP_CKSUMV4)
+#define RMNET_MAINLINE_FLAGS	(RMNET_SHARED_FLAGS | \
+				 RMNET_FLAGS_INGRESS_MAP_CKSUMV5 | \
+				 RMNET_FLAGS_EGRESS_MAP_CKSUMV5)
+
+static uint32_t rmnet_mainline_flags(uint32_t flagconfig)
+{
+	uint32_t flags = flagconfig & RMNET_SHARED_FLAGS;
+
+	if (flagconfig & RMNET_DOWNSTREAM_INGRESS_MAP_CKSUMV5)
+		flags |= RMNET_FLAGS_INGRESS_MAP_CKSUMV5;
+	if (flagconfig & RMNET_DOWNSTREAM_EGRESS_MAP_CKSUMV5)
+		flags |= RMNET_FLAGS_EGRESS_MAP_CKSUMV5;
+
+	return flags;
+}
+
+static uint32_t rmnet_downstream_flags(uint32_t flags)
+{
+	uint32_t flagconfig = flags & RMNET_SHARED_FLAGS;
+
+	if (flags & RMNET_FLAGS_INGRESS_MAP_CKSUMV5)
+		flagconfig |= RMNET_DOWNSTREAM_INGRESS_MAP_CKSUMV5;
+	if (flags & RMNET_FLAGS_EGRESS_MAP_CKSUMV5)
+		flagconfig |= RMNET_DOWNSTREAM_EGRESS_MAP_CKSUMV5;
+
+	return flagconfig;
+}
+#endif
+
 /* @brief Fill a Netlink messages with the necessary common RTAs for creating a
  * RTM_NEWLINK message for creating or changing rmnet devices.
  * @param *req The netlink message
@@ -1256,8 +1294,13 @@ static int rmnet_fill_newlink_msg(struct nlmsg *req, size_t *reqsize,
 		return rc;
 
 	if (flagconfig != 0) {
+#ifdef USE_MAINLINE_RMNET
+		flags.mask = RMNET_MAINLINE_FLAGS;
+		flags.flags = rmnet_mainline_flags(flagconfig);
+#else
 		flags.mask = flagconfig;
 		flags.flags = flagconfig;
+#endif
 
 		rc = rta_put(req, reqsize, RMNETCTL_IFLA_FLAGS, sizeof(flags),
 			     &flags);
@@ -1760,7 +1803,11 @@ int rtrmnet_ctl_getvnd(rmnetctl_hndl_t *hndl, char *vndname,
 
 		flags = (struct ifla_vlan_flags *)
 			 RTA_DATA(tb[RMNETCTL_IFLA_FLAGS]);
+#ifdef USE_MAINLINE_RMNET
+		*flagconfig = rmnet_downstream_flags(flags->flags);
+#else
 		*flagconfig = flags->flags;
+#endif
 	}
 	if (tb[RMNETCTL_IFLA_UPLINK_PARAMS]) {
 		struct rmnetctl_uplink_params *ul_agg;
